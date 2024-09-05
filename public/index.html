@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ali Insures</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="logo.png" alt="Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="slideshow-container">
+        <div class="slideshow-slide">
+            <img src="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/0x0.jpg" alt="Slide 1">
+        </div>
+        <div class="slideshow-slide">
+            <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?cs=srgb&dl=pexels-binyaminmellish-106399.jpg&fm=jpg" alt="Slide 2">
+        </div>
+        <div class="slideshow-slide">
+            <img src="https://www.savethestudent.org/uploads/flights.jpg" alt="Slide 3">
+        </div>
+        <div class="slideshow-control">
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+        </div>
+    </div>
+    <main>
+        <div class="main-container">
+            <section class="hero">
+                <h1>Get Your Insurance Quote Today</h1>
+                <p>Quick and easy insurance quotes for your needs.</p>
+            </section>
+            <section class="services">
+                <h2>Our Services</h2>
+                <div class="services-container">
+                    <div class="service-card">
+                        <h3>Car Insurance</h3>
+                        <p>Comprehensive coverage for your car.</p>
+                        <div class="form-container">
+                            <label for="numberPlateCar">Enter vehicle number plate:</label>
+                            <input type="text" id="numberPlateCar" placeholder="e.g. DP16LEF">
+                            <button id="searchButtonCar">Search</button>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <h3>Home Insurance</h3>
+                        <p>Protect your home and belongings.</p>
+                        <div class="form-container">
+                            <label for="postcode">Enter postcode:</label>
+                            <input type="text" id="postcode" placeholder="e.g. E10 5LS">
+                            <button id="searchButtonHome">Search</button>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <h3>Travel Insurance</h3>
+                        <p>Insurance for your travels and vacations.</p>
+                        <div class="form-container">
+                            <label for="holidayDestination">Enter holiday destination:</label>
+                            <input type="text" id="holidayDestination" placeholder="e.g. France">
+                            <button id="searchButtonTravel">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 AliInsurance. All rights reserved.</p>
+            <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+<script src="scripts.js"></script>
+
+</body>
+</html>

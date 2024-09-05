@@ -5,6 +5,9 @@ const getItems = require('./routes/getItems');
 const addItem = require('./routes/addItem');
 const updateItem = require('./routes/updateItem');
 const deleteItem = require('./routes/deleteItem');
+const car_information = require('./routes/car_information');
+const driver_information = require('./routes/driver_information');
+const quote = require('./routes/quote');
 
 app.use(express.json());
 app.use(express.static(__dirname + '/static'));

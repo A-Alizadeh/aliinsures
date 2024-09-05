@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #0033A0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0033A0;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .logout-button {
+            background-color: #dc3545;
+            display: block;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .logout-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <h2>Car Submissions</h2>
+        <div id="carTable"></div>
+
+        <h2>Driver Submissions</h2>
+        <div id="driverTable"></div>
+
+        <a href="/logout" class="logout-button">Logout</a>
+    </div>
+
+    <script>
+    // Fetch car and driver data from the server and display it in tables
+    fetch('/admin-data')
+        .then(response => response.json())
+        .then(data => {
+            const carRows = data.car;
+            const driverRows = data.driver;
+
+            let carTable = `
+                <table>
+                    <tr>
+                        <th>ID</th><th>Number Plate</th><th>Make</th><th>Model</th><th>Colour</th><th>Fuel Type</th><th>Power</th><th>Engine Capacity</th><th>Action</th>
+                    </tr>`;
+            carRows.forEach(row => {
+                carTable += `
+                    <tr>
+                        <td>${row.id}</td><td>${row.number_plate}</td><td>${row.make}</td><td>${row.model}</td>
+                        <td>${row.colour}</td><td>${row.fuel_type}</td><td>${row.power}</td><td>${row.engine_capacity}</td>
+                        <td><button onclick="deleteEntry('car', ${row.id})">Delete</button></td>
+                    </tr>`;
+            });
+            carTable += '</table>';
+            document.getElementById('carTable').innerHTML = carTable;
+
+            let driverTable = `
+                <table>
+                    <tr>
+                        <th>ID</th><th>Number Plate</th><th>Title</th><th>First Name</th><th>Last Name</th><th>Date of Birth</th><th>License Number</th><th>Address</th><th>Postcode</th><th>Quote ID</th><th>Quote Price</th><th>Action</th>
+                    </tr>`;
+            driverRows.forEach(row => {
+                driverTable += `
+                    <tr>
+                        <td>${row.id}</td><td>${row.number_plate}</td><td>${row.title}</td><td>${row.first_name}</td><td>${row.last_name}</td>
+                        <td>${row.dob}</td><td>${row.license_number}</td><td>${row.address}</td><td>${row.postcode}</td><td>${row.quote_id}</td><td>${row.quote_price}</td>
+                        <td><button onclick="deleteEntry('driver', ${row.id})">Delete</button></td>
+                    </tr>`;
+            });
+            driverTable += '</table>';
+            document.getElementById('driverTable').innerHTML = driverTable;
+        })
+        .catch(error => {
+            console.error('Error fetching admin data:', error);
+        });
+
+    function deleteEntry(type, id) {
+    if (confirm(`Are you sure you want to delete this ${type} entry?`)) {
+        console.log(`Sending DELETE request to /delete-${type}/${id}`);
+        
+        fetch(`/delete-${type}/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            console.log(`Response status: ${response.status}`);
+            
+            if (response.ok) {
+                alert('Entry deleted successfully.');
+                // Reload the page or fetch data again to update the table
+                window.location.reload();
+            } else {
+                alert('Failed to delete the entry.');
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting entry:', error);
+        });
+    }
+}
+</script>
+
+
+</body>
+</html>
+
